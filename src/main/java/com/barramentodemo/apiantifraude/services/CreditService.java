@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.barramentodemo.apiantifraude.models.Transaction;
 
 @Service
-public class TransactionService {
+public class CreditService {
     @Autowired
     private Transaction transaction;
 
@@ -14,7 +14,7 @@ public class TransactionService {
         return obj;
     }
     
-    public Transaction debitTransaction(Transaction obj){
+    public Transaction creditAdvice(Transaction obj){
         return obj;
     }
 

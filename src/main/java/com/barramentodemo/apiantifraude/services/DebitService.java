@@ -1,21 +1,29 @@
 package com.barramentodemo.apiantifraude.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.barramentodemo.apiantifraude.models.Transaction;
+//import com.barramentodemo.apiantifraude.models.Transaction;
 
 @Service
 public class DebitService {
-    @Autowired
-    private Transaction transaction;
+    
+    public String debitTransaction(){
+        return "Sucesso Transaction Debit";
+    }
 
-    public Transaction debitTransaction(Transaction obj){
+    public String debitAdvice(){
+        return "Sucesso Advice debit";
+    }
+    /*
+    public Transaction creditTransaction(Transaction obj){
         
         return obj;
     }
     
-    public Transaction debitAdvice(Transaction obj){
+    public Transaction creditAdvice(Transaction obj){
+        this.transaction = new Transaction();
+        transaction.setBrand("visa");
         return obj;
     }
-
+ */
 }

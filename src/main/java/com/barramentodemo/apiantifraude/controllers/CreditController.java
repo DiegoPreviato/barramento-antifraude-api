@@ -25,10 +25,13 @@ public class CreditController {
     @PostMapping("/transaction")
     @Validated(Transaction.class)
     public ResponseEntity<Object> transaction(@RequestBody Transaction obj) {
-        this.creditService.creditTransaction(obj);
+        /*this.creditService.creditTransaction(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
             .path("/transaction").buildAndExpand(obj.getTransactionId()).toUri();
         return ResponseEntity.created(uri).build();
+        */
+        return ResponseEntity.ok();
+        
     }
     
     @PostMapping("/advice")

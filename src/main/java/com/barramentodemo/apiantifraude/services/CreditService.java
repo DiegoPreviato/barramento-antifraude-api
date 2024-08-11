@@ -7,8 +7,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreditService {
     
-    public String creditTransaction(){
-        return "Sucesso Transaction";
+    public String creditTransaction(String entrada){
+        if (entrada == "Entrada") {
+            return("Sucesso, bateu");
+        }else{
+            return("Erro, não bateu");
+
+        } 
     }
 
     public String creditAdvice(){
@@ -26,4 +31,7 @@ public class CreditService {
         return obj;
     }
  */
+
+    public class creditTransaction {
+    }
 }

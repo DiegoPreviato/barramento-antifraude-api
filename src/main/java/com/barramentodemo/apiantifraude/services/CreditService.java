@@ -10,11 +10,14 @@ public class CreditService {
     private Transaction transaction;
 
     public Transaction creditTransaction(Transaction obj){
-        
+        this.transaction = new Transaction();
+        transaction.setBrand("visa");
         return obj;
     }
     
     public Transaction creditAdvice(Transaction obj){
+        this.transaction = new Transaction();
+        transaction.setBrand("visa");
         return obj;
     }
 

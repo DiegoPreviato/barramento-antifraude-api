@@ -1,29 +1,59 @@
 package com.barramentodemo.apiantifraude.services;
 
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-//import com.barramentodemo.apiantifraude.models.Transaction;
+import org.springframework.web.client.RestTemplate;
+
+import com.barramentodemo.apiantifraude.models.AdviceResDTO;
+import com.barramentodemo.apiantifraude.models.TransactionReqDTO;
+import com.barramentodemo.apiantifraude.models.TransactionResDTO;
+
 
 @Service
 public class DebitService {
+    @Autowired
+    private RestTemplate restTemplate;
+    Logger logger = LoggerFactory.getLogger(CreditService.class);
     
-    public String debitTransaction(){
-        return "Sucesso Transaction Debit";
+    public TransactionResDTO executarTransacao (TransactionReqDTO reqDTO) {
+        /*URL fixa para o desafio, poderia ser uma classe com notação @Configuration
+        caso esse valor viesse de uma variável de ambiente por exemplo */
+        String url = "http://localhost:3000/debit/transaction";
+
+        logger.info("Chamando o endpoint: " + url);
+        HttpEntity<TransactionReqDTO> requestEntity = new HttpEntity<>(reqDTO);
+
+        ResponseEntity<TransactionResDTO> responseEntity = restTemplate.exchange(
+            url,
+            HttpMethod.POST,
+            requestEntity,
+            TransactionResDTO.class    
+        );
+        return responseEntity.getBody();        
     }
 
-    public String debitAdvice(){
-        return "Sucesso Advice debit";
+    @Async
+    public void executarAdvice (TransactionReqDTO reqDTO) {
+        /*URL fixa para o desafio, poderia ser uma classe com notação @Configuration
+        caso esse valor viesse de uma variável de ambiente por exemplo */
+        String url = "http://localhost:3000/debit/advice";
+
+        logger.info("Chamando o endpoint: " + url);
+        HttpEntity<TransactionReqDTO> requestEntity = new HttpEntity<>(reqDTO);
+
+        ResponseEntity<AdviceResDTO> responseEntity = restTemplate.exchange(
+            url,
+            HttpMethod.POST,
+            requestEntity,
+            AdviceResDTO.class
+        );
+        logger.info("Fim da chamada ao endpoint: " + url +
+                " http: " + responseEntity.getStatusCode());
     }
-    /*
-    public Transaction creditTransaction(Transaction obj){
-        
-        return obj;
-    }
-    
-    public Transaction creditAdvice(Transaction obj){
-        this.transaction = new Transaction();
-        transaction.setBrand("visa");
-        return obj;
-    }
- */
 }
